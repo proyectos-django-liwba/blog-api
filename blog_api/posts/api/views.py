@@ -4,25 +4,38 @@ from rest_framework.response import Response
 # agregar la clase APIView
 #from rest_framework.views import APIView
 # agregar viewsets
-from rest_framework.viewsets import ViewSet
+#from rest_framework.viewsets import ViewSet
 # agregar modelviewset
-#from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet
 # hacer uso de ORM de django para obtener los datos de BD
 from posts.models import Post
 # validar los datos antes de crear el objeto Post
 from rest_framework.exceptions import ValidationError
 # serializar los objetos
 from posts.api.serializers import PostSerializer
+# permisos de acceso
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from posts.api.permissions import IsAdminOrReadOnly
 
-""" 
+
+# ModelViewSet
+
 class PostModelViewSet(ModelViewSet):
+    # se puede agregar 1 o mas permisos
+    permission_classes = [IsAdminOrReadOnly]
+    # agregar el serializador
     serializer_class = PostSerializer
+    # agregar todas las operaciones GET, POST, PUT, DELETE
     queryset = Post.objects.all()
+    # definir las operaciones que se pueden realizar
+    http_method_names = ['get', 'post', 'put', 'delete']
 
 
-"""
 
-class PostViewSet(ViewSet):
+
+
+# ViewSet
+""" class PostViewSet(ViewSet):
     
     # obtener todos los posts mediante el ORM de django
     def list(self, request):
@@ -62,8 +75,9 @@ class PostViewSet(ViewSet):
             # Manejar otros errores
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+ """
 
-
+# APIView
 """ 
 class PostApiView(APIView):
     def get(self, request):

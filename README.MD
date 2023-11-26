@@ -146,3 +146,30 @@ el archivo de url del proyecto.
 * documentacion [ModelViewset](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset)
 Automatiza todos los manejos de las operaciones del crud en la api
 Tambien permite controlar las solicitudes que se necesitan, definiendolas
+
+
+#### Sistema de permisos ModelViewSet
+Es utilizado para establecer los permisos de las clases  al acceder 
+a los endpoints
+
+* Documentacion [Permissions](https://www.django-rest-framework.org/api-guide/permissions/)
+
+* Es posible crear permisos personalizados
+
+### drf-yasg
+
+* Pagina [def-yasg](https://pypi.org/project/drf-yasg/)
+* documentación [def-yasg](https://drf-yasg.readthedocs.io/en/stable/)
+* instalación [def-yasg](https://drf-yasg.readthedocs.io/en/stable/readme.html#installation)
+
+Utilizada para documentar todos los endpoints
+* comando: `pip install -U setuptools`
+* comando instalacion: `pip install drf-yasg`
+* modificar el archivo settings: 
+    - agregar `drf-yasg` a INSTALLED_APPS
+    - agregar debajo de `STATIC_URL = 'static/'` esta linea `STATIC_ROOT = './static/'`
+* comando generar UI: `python manage.py collectstatic`
+
+Se genera una carpeta nueva static
+
+* agregar la url para la documentacion 
