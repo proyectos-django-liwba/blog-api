@@ -173,3 +173,62 @@ Utilizada para documentar todos los endpoints
 Se genera una carpeta nueva static
 
 * agregar la url para la documentacion 
+
+### User Override 
+* modificar el panel de administrador de un usuario
+* el override permite agregar nuevos atributos a los usuarios
+* se recomienda hacer un override al inicio de cada proyecto ya que luego es mas complejo hacerlo, si no se hizo uno al inicio.
+
+* documentacion [Customizing authentication](https://docs.djangoproject.com/en/4.2/topics/auth/customizing/)
+
+#### Crear un override
+* crear una nueva aplicacion para usuarios, user `python manage.py startapp user`
+* crear el modelo
+* agregar user para el manejo de usuarios,  en el settings.py del proyecto
+
+`
+    INSTALLED_APPS = [
+        ...
+        'user',
+    ]
+
+    AUTH_USER_MODEL = 'user.User'
+`
+* borra la base de datos y los archivos de migraciones de todo el proyecto
+* hacer migracion `python manage.py makemigrations` y `python manage.py migrate`
+* creamos un usuario administrador
+* agregamos en el panel de administracion el modelo user
+
+* tambien se puede modificar el acceso al panel de admi iniciando
+sesion con el correo
+
+### JWT Json Web Token
+Agrega una mayor seguridad en el acceso a la api.
+
+* libreria [djangorestframeword-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+
+* comando de instalacion `pip install djangorestframework-simplejwt`
+
+## Pagina oficial de PIP para buscar documentacion de librerias
+
+* Documentacion [Python Install Packege](https://pypi.org/project/pip/)
+
+### verificar el tiempo de caducacion de un token
+
+* Pagina web: [JWT](https://jwt.io/)
+Copia el access que genera jwt en la api y pega en la pagina
+este valor se ve en el atributo: exp de expiracion
+
+* por default tiene un minuto de caducidad. Es necesario incrementarlo
+
+* modificar en setting.py del proyecto agregando 
+
+`
+import datetime
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
+`
+
