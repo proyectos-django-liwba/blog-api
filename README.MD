@@ -196,7 +196,7 @@ Se genera una carpeta nueva static
 `
 * borra la base de datos y los archivos de migraciones de todo el proyecto
 * hacer migracion `python manage.py makemigrations` y `python manage.py migrate`
-* creamos un usuario administrador
+* creamos un usuario administrador: `python manage.py createsuperuser`
 * agregamos en el panel de administracion el modelo user
 
 * tambien se puede modificar el acceso al panel de admi iniciando
@@ -208,6 +208,14 @@ Agrega una mayor seguridad en el acceso a la api.
 * libreria [djangorestframeword-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 
 * comando de instalacion `pip install djangorestframework-simplejwt`
+
+```
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+```
 
 ## Pagina oficial de PIP para buscar documentacion de librerias
 
@@ -221,14 +229,46 @@ este valor se ve en el atributo: exp de expiracion
 
 * por default tiene un minuto de caducidad. Es necesario incrementarlo
 
-* modificar en setting.py del proyecto agregando 
-
+* modificar en setting.py del proyecto agregando, un segmento # Authenticacion JWT luego del # Database
 `
-import datetime
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 }
 `
 
+* se crea la carpeta api en la app user, y se crea el archivo router.py
+En este archivo se configura la ruta de login y regenerar token
+
+* por ultimo se agrega en urls.py del proyecto 
+
+### Conectar base de datos
+
+* Documentacion [Database Conect](https://docs.djangoproject.com/en/4.2/ref/databases/)
+
+* Documentacion [Guia Conexion](https://docs.djangoproject.com/en/4.2/ref/settings/#databases)
+
+* modificar el archivo settings.py del proyecto el segmento # Database
+```
+# este en la parte superior
+import datetime
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "mydatabase",
+        "USER": "mydatabaseuser",
+        "PASSWORD": "mypassword",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+```
+
+* instalar dependencia: pip install psycopg2-binary
+
+* debe salir el error que solicita migracion
+
+* hacer migracion `python manage.py makemigrations` y `python manage.py migrate`, pero antes borrar todos los archivos generados de migrations de las app, la base de datos anterior
+
+* por ultimo hacer un super usuario: `python manage.py createsuperuser`
