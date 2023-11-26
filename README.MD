@@ -102,3 +102,47 @@ Nota: si se borran archivos de migraciones, se debe eliminar su
 registro en la base de datos. Tambien si se quiere limpiar la caperta
 de migraciones al final se recomienda eliminar la base de datos y los 
 archivos de migraciones, para luego ejecutar los dos comandos de migraciones. `python manage.py makemigrations` y `python manage.py migrate`
+
+### Django Rest Framework
+
+* [Documentacion](https://www.django-rest-framework.org/tutorial/quickstart/#quickstart)
+
+* [Instalación](https://www.django-rest-framework.org/)
+
+* comando de instalacion: `pip install djangorestframework`
+
+* Agregue `rest_framework`a su INSTALLED_APPS configuración.
+Esto el archivo settings.py del proyecto
+`
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    ...
+]
+`
+### Crear end points 
+Estos son agregados desde cada app creada, y registrados en
+el archivo de url del proyecto.
+
+* agregar los modelos, en el archivo admin.py de la app
+
+* se crea en cada app una carpeta api, con 2 archivos
+    - views.py : en este archivo se agregan el response y ORM
+    - __init__.py 
+
+* en el archivo url, se registran las url para el CRUD
+
+### ViewSet 
+
+* documentacion [ViewSet](https://www.django-rest-framework.org/api-guide/viewsets/)
+
+### ModelViewSet
+
+* documentacion [ModelViewset](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset)
+Automatiza todos los manejos de las operaciones del crud en la api
+Tambien permite controlar las solicitudes que se necesitan, definiendolas
