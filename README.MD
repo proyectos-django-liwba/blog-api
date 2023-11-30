@@ -230,15 +230,15 @@ este valor se ve en el atributo: exp de expiracion
 * por default tiene un minuto de caducidad. Es necesario incrementarlo
 
 * modificar en setting.py del proyecto agregando, un segmento # Authenticacion JWT luego del # Database
-`
-# este en la parte superior
-import datetime
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-}
-`
+```
+  # este en la parte superior
+  import datetime
+  
+  SIMPLE_JWT = {
+      'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+      'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+  }
+```
 
 * se crea la carpeta api en la app user, y se crea el archivo router.py
 En este archivo se configura la ruta de login y regenerar token
