@@ -231,6 +231,9 @@ este valor se ve en el atributo: exp de expiracion
 
 * modificar en setting.py del proyecto agregando, un segmento # Authenticacion JWT luego del # Database
 `
+# este en la parte superior
+import datetime
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
@@ -250,8 +253,6 @@ En este archivo se configura la ruta de login y regenerar token
 
 * modificar el archivo settings.py del proyecto el segmento # Database
 ```
-# este en la parte superior
-import datetime
 
 DATABASES = {
     "default": {
